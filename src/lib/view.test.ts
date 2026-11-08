@@ -52,6 +52,14 @@ describe("buildDashboard", () => {
     expect(ep3.theirs).toBe("hidden");
   });
 
+  test("blurs the still of every episode I haven't watched yet", () => {
+    const view = buildDashboard(entries, "baptiste");
+    const [ep1, ep2, ep3] = view.seasons[0].episodes;
+    expect([ep1.isStillBlurred, ep2.isStillBlurred, ep3.isStillBlurred]).toEqual([false, false, true]);
+    expect(view.upNext?.isStillBlurred).toBe(true);
+    expect(view.seasons[10].episodes[0].isStillBlurred).toBe(true);
+  });
+
   test("the leader sees everything the other has watched", () => {
     const view = buildDashboard(entries, "ivy");
     const [, , ep3] = view.seasons[0].episodes;

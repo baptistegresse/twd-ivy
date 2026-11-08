@@ -31,7 +31,12 @@ export function EpisodeCard({ episode, names, isUpNext, theme }: EpisodeCardProp
           {episode.episode}
         </span>
         <span className="relative aspect-video w-36 shrink-0 overflow-hidden rounded-md bg-surface-2 sm:w-48">
-          <EpisodeStill src={meta.still ?? meta.thumb} alt={meta.title} {...stillSizing(theme, "thumb")} />
+          <EpisodeStill
+            src={meta.still ?? meta.thumb}
+            alt={meta.title}
+            isBlurred={episode.isStillBlurred}
+            {...stillSizing(theme, "thumb")}
+          />
           {isUpNext && (
             <span className="absolute left-1.5 top-1.5 rounded bg-blood px-1.5 py-0.5 text-[10px] font-semibold uppercase">
               Up next

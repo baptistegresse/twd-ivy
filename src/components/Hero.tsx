@@ -44,6 +44,7 @@ export function Hero({ upNext, headline, otherName, theme }: HeroProps) {
             alt={`${upNext.label} · ${meta.title}`}
             {...stillSizing(theme, "hero")}
             isPriority
+            isBlurred={upNext.isStillBlurred}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
           <div className="absolute inset-0 bg-gradient-to-r from-background/90 via-background/30 to-transparent" />

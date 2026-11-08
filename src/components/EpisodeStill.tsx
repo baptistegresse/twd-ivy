@@ -26,7 +26,7 @@ export function EpisodeStill({
   isBlurred = false,
   className = "",
 }: EpisodeStillProps) {
-  const effects = `object-cover ${isBlurred ? "scale-110 blur-md brightness-50" : ""} ${className}`;
+  const effects = `object-cover ${isBlurred ? "scale-110 blur-md brightness-75" : ""} ${className}`;
 
   if (!src) {
     return (

@@ -17,6 +17,8 @@ export interface EpisodeView {
   meta: EpisodeMeta;
   mine: EntrySummary | null;
   theirs: EntrySummary | "hidden" | null;
+  /** Spoiler shield for images: stills stay blurred until I've watched the episode. */
+  isStillBlurred: boolean;
 }
 
 export interface SeasonView {
@@ -83,13 +85,15 @@ function buildSeasons(
       const key = keyOf(season, episode);
       const their = theirs.get(key);
       const isVisible = canSeeEntry(myProgress, season, episode);
+      const myEntry = mine.get(key);
       return {
         season,
         episode,
         label: episodeLabel(season, episode),
         meta: getEpisodeMeta(season, episode),
-        mine: summarize(mine.get(key)),
+        mine: summarize(myEntry),
         theirs: their && !isVisible ? "hidden" : summarize(their),
+        isStillBlurred: !myEntry,
       };
     });
     return {
