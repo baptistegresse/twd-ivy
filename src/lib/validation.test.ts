@@ -31,7 +31,7 @@ describe("parseEntryForm", () => {
     );
     expect(result).toEqual({
       success: false,
-      error: "30 caractères max pour le petit mot.",
+      error: "Short note is 30 characters max.",
     });
   });
 
@@ -56,7 +56,7 @@ describe("parseEntryForm", () => {
     const result = parseEntryForm(
       form({ season: "1", episode: "7", rating: "3", note: "" }),
     );
-    expect(result).toEqual({ success: false, error: "Épisode inconnu." });
+    expect(result).toEqual({ success: false, error: "Unknown episode." });
   });
 });
 

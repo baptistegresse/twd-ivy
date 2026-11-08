@@ -14,14 +14,14 @@ function Summary({ entry }: { entry: EntrySummary }) {
   return (
     <span className="flex min-w-0 items-center gap-2">
       <Stars rating={entry.rating} />
-      {entry.note && <span className="truncate text-muted">« {entry.note} »</span>}
+      {entry.note && <span className="truncate text-muted">“{entry.note}”</span>}
     </span>
   );
 }
 
 function TheirSide({ theirs, otherName }: Pick<EpisodeView, "theirs"> & { otherName: string }) {
-  if (theirs === null) return <span className="text-muted/50">{otherName} : pas vu</span>;
-  if (theirs === "hidden") return <span className="text-muted">{otherName} : 🙈 vu, caché</span>;
+  if (theirs === null) return <span className="text-muted/50">{otherName}: not watched</span>;
+  if (theirs === "hidden") return <span className="text-muted">{otherName}: 🙈 watched, hidden</span>;
   return (
     <span className="flex min-w-0 items-center gap-2">
       <span className="shrink-0 text-moss">{otherName}</span>
@@ -46,7 +46,7 @@ export function EpisodeRow({ episode, otherName }: EpisodeRowProps) {
           {episode.mine ? (
             <Summary entry={episode.mine} />
           ) : (
-            <span className="text-blood-soft">+ Je l&apos;ai vu</span>
+            <span className="text-blood-soft">+ I watched it</span>
           )}
         </button>
         <span className="flex min-w-0 basis-full items-center pl-20 sm:basis-auto sm:pl-0">

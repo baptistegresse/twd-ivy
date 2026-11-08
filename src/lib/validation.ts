@@ -12,24 +12,24 @@ const entrySchema = z
     episode: z.coerce.number().int(),
     rating: z
       .string()
-      .regex(/^[1-5]$/, "Choisis une note entre 1 et 5.")
+      .regex(/^[1-5]$/, "Pick a rating from 1 to 5.")
       .transform(Number),
     note: z
       .string()
       .trim()
       .refine((note) => noteLength(note) <= NOTE_MAX_LENGTH, {
-        message: `${NOTE_MAX_LENGTH} caractères max pour le petit mot.`,
+        message: `Short note is ${NOTE_MAX_LENGTH} characters max.`,
       }),
   })
   .refine(({ season, episode }) => isValidEpisode(season, episode), {
-    message: "Épisode inconnu.",
+    message: "Unknown episode.",
   });
 
 export type EntryInput = z.infer<typeof entrySchema>;
 
 const loginSchema = z.object({
-  user: z.enum(USERS, { message: "Qui es-tu ?" }),
-  passcode: z.string().min(1, "Il faut le code secret."),
+  user: z.enum(USERS, { message: "Who are you?" }),
+  passcode: z.string().min(1, "The secret code is required."),
 });
 
 export interface LoginInput {
@@ -39,7 +39,7 @@ export interface LoginInput {
 
 function toResult<T>(parsed: z.ZodSafeParseResult<T>): ParseResult<T> {
   if (parsed.success) return { success: true, data: parsed.data };
-  return { success: false, error: parsed.error.issues[0]?.message ?? "Entrée invalide." };
+  return { success: false, error: parsed.error.issues[0]?.message ?? "Invalid input." };
 }
 
 const field = (form: FormData, key: string): string => {

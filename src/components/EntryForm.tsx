@@ -45,7 +45,7 @@ export function EntryForm({ episode, onDone }: EntryFormProps) {
       <input type="hidden" name="episode" value={episode.episode} />
 
       <fieldset className="flex items-center gap-1">
-        <legend className="sr-only">Note sur 5</legend>
+        <legend className="sr-only">Rating out of 5</legend>
         {RATINGS.map((value) => (
           <label key={value} className="cursor-pointer text-2xl leading-none">
             <input
@@ -63,19 +63,19 @@ export function EntryForm({ episode, onDone }: EntryFormProps) {
             >
               ★
             </span>
-            <span className="sr-only">{value} sur 5</span>
+            <span className="sr-only">{value} out of 5</span>
           </label>
         ))}
       </fieldset>
 
       <label className="block">
-        <span className="sr-only">Petit mot</span>
+        <span className="sr-only">Short note</span>
         <div className="flex items-center gap-2">
           <input
             name="note"
             value={note}
             onChange={(event) => setNote(event.target.value)}
-            placeholder="Un petit mot (optionnel)"
+            placeholder="A short note (optional)"
             autoComplete="off"
             className={`flex-1 rounded-md border bg-background px-3 py-2 outline-none ${isTooLong ? "border-blood-soft" : "border-border focus:border-gold"}`}
           />
@@ -97,10 +97,10 @@ export function EntryForm({ episode, onDone }: EntryFormProps) {
           disabled={isSaving || isTooLong || rating === 0}
           className="rounded-md bg-blood px-3 py-1.5 font-medium hover:bg-blood-soft disabled:opacity-50"
         >
-          {isSaving ? "…" : "Enregistrer"}
+          {isSaving ? "…" : "Save"}
         </button>
         <button type="button" onClick={onDone} className="px-2 py-1.5 text-muted hover:text-foreground">
-          Annuler
+          Cancel
         </button>
         {episode.mine && (
           <button
@@ -109,7 +109,7 @@ export function EntryForm({ episode, onDone }: EntryFormProps) {
             disabled={isRemoving}
             className="ml-auto px-2 py-1.5 text-xs text-muted hover:text-blood-soft"
           >
-            {isRemoving ? "…" : "Pas vu finalement"}
+            {isRemoving ? "…" : "Not watched after all"}
           </button>
         )}
       </div>

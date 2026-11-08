@@ -15,7 +15,7 @@ const specialElite = Special_Elite({
 
 export const metadata: Metadata = {
   title: "TWD · Baptiste & Ivy",
-  description: "Notre carnet de survie : où on en est dans The Walking Dead.",
+  description: "Our survival log: where each of us is in The Walking Dead.",
   robots: { index: false, follow: false },
 };
 
@@ -26,7 +26,7 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
-      lang="fr"
+      lang="en"
       className={`${geistSans.variable} ${specialElite.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans">{children}</body>

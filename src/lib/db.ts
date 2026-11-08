@@ -5,7 +5,7 @@ import type { EntryInput } from "./validation";
 
 function getSql() {
   const url = process.env.DATABASE_URL;
-  if (!url) throw new Error("DATABASE_URL n'est pas configurée.");
+  if (!url) throw new Error("DATABASE_URL is not configured.");
   return neon(url);
 }
 

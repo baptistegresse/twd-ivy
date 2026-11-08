@@ -18,7 +18,7 @@ export interface ActionState {
   ok?: boolean;
 }
 
-const GENERIC_ERROR = "Oups, ça n'a pas marché. Réessaie dans un instant.";
+const GENERIC_ERROR = "Oops, that didn't work. Try again in a moment.";
 
 export async function login(_prev: ActionState, form: FormData): Promise<ActionState> {
   const parsed = parseLoginForm(form);
@@ -26,7 +26,7 @@ export async function login(_prev: ActionState, form: FormData): Promise<ActionS
 
   const expected = process.env.APP_PASSCODE ?? "";
   if (!isPasscodeValid(parsed.data.passcode, expected)) {
-    return { error: "Mauvais code. Les rôdeurs ne passent pas." };
+    return { error: "Wrong code. No walkers allowed." };
   }
 
   const store = await cookies();
@@ -64,7 +64,7 @@ export async function saveEntry(_prev: ActionState, form: FormData): Promise<Act
 
 export async function removeEntry(season: number, episode: number): Promise<ActionState> {
   const user = await requireUser();
-  if (!isValidEpisode(season, episode)) return { error: "Épisode inconnu." };
+  if (!isValidEpisode(season, episode)) return { error: "Unknown episode." };
 
   try {
     await deleteEntry(user, season, episode);

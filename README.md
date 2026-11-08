@@ -1,27 +1,27 @@
 # TWD · Baptiste & Ivy
 
-Carnet de survie partagé pour suivre *The Walking Dead* chacun de son côté :
-où en est l'autre, une note sur 5 et un petit mot (30 caractères max) par épisode.
+A shared survival log for watching *The Walking Dead* apart: see where the other one is,
+rate each episode out of 5 and leave a short note (30 characters max).
 
-- **Bouclier anti-spoiler** : les notes de l'autre restent cachées tant que tu n'as pas atteint l'épisode.
-- **Accès** : un code secret commun (`APP_PASSCODE`), puis on choisit qui on est. Session signée (`SESSION_SECRET`) valable un an.
+- **Spoiler shield**: the other person's ratings stay hidden until you reach that episode.
+- **Access**: one shared secret code (`APP_PASSCODE`), then pick who you are. Signed session (`SESSION_SECRET`) lasts a year.
 
 ## Stack
 
-Next.js 16 (App Router, Server Actions) · Tailwind 4 · Neon Postgres (intégration Vercel) · Zod · Vitest.
+Next.js 16 (App Router, Server Actions) · Tailwind 4 · Neon Postgres (Vercel integration) · Zod · Vitest.
 
 ## Dev
 
 ```bash
 vercel env pull .env.local   # DATABASE_URL, APP_PASSCODE, SESSION_SECRET
 pnpm install
-pnpm db:migrate              # crée la table `entries` si besoin
+pnpm db:migrate              # creates the `entries` table if needed
 pnpm dev
 ```
 
 ```bash
-pnpm test        # tests unitaires
-pnpm coverage    # couverture (seuil 80 %)
+pnpm test        # unit tests
+pnpm coverage    # coverage (80% threshold)
 ```
 
-Déploiement : chaque push sur `main` part en prod sur Vercel (équipe `agence-bcg`, projet `twd-ivy`).
+Deploys: every push to `main` goes to production on Vercel (team `agence-bcg`, project `twd-ivy`).

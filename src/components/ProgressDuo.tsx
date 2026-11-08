@@ -15,9 +15,9 @@ interface ProgressDuoProps {
 const plural = (count: number, word: string) => `${count} ${word}${count > 1 ? "s" : ""}`;
 
 function headline({ comparison }: DashboardView, names: Names): string {
-  if (comparison.leader === "tie") return "Vous êtes pile au même endroit 🤝";
-  const ahead = comparison.leader === "me" ? "Tu as" : `${names.other} a`;
-  return `${ahead} ${plural(comparison.gap, "épisode")} d'avance`;
+  if (comparison.leader === "tie") return "You're at the exact same spot 🤝";
+  const ahead = comparison.leader === "me" ? "You are" : `${names.other} is`;
+  return `${ahead} ${plural(comparison.gap, "episode")} ahead`;
 }
 
 interface ProgressCardProps {
@@ -31,7 +31,7 @@ function ProgressCard({ name, progress, isMe }: ProgressCardProps) {
   return (
     <div className="flex-1 rounded-xl border border-border bg-surface p-4">
       <div className="flex items-baseline justify-between">
-        <p className="font-medium">{isMe ? `${name} (toi)` : name}</p>
+        <p className="font-medium">{isMe ? `${name} (you)` : name}</p>
         <p className="font-display text-2xl">
           {furthest ? episodeLabel(furthest.season, furthest.episode) : "—"}
         </p>
@@ -46,7 +46,7 @@ function ProgressCard({ name, progress, isMe }: ProgressCardProps) {
         <span>
           {watchedCount}/{TOTAL_EPISODES} · {Math.round(percent)}%
         </span>
-        <span>{averageRating ? `moy. ${averageRating.toFixed(1)} ★` : "pas encore noté"}</span>
+        <span>{averageRating ? `avg. ${averageRating.toFixed(1)} ★` : "no ratings yet"}</span>
       </div>
     </div>
   );

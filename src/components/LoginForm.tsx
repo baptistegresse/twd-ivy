@@ -15,12 +15,12 @@ export function LoginForm() {
       className="w-full max-w-sm space-y-6 rounded-xl border border-border bg-surface p-6 shadow-2xl"
     >
       <div className="space-y-1 text-center">
-        <h1 className="font-display text-3xl">Carnet de survie</h1>
+        <h1 className="font-display text-3xl">Survival Log</h1>
         <p className="text-sm text-muted">The Walking Dead · Baptiste & Ivy</p>
       </div>
 
       <fieldset className="space-y-2">
-        <legend className="mb-2 text-sm text-muted">Qui es-tu ?</legend>
+        <legend className="mb-2 text-sm text-muted">Who are you?</legend>
         <div className="grid grid-cols-2 gap-3">
           {USERS.map((user, index) => (
             <label key={user} className="cursor-pointer">
@@ -40,7 +40,7 @@ export function LoginForm() {
       </fieldset>
 
       <label className="block space-y-2">
-        <span className="text-sm text-muted">Code secret</span>
+        <span className="text-sm text-muted">Secret code</span>
         <input
           type="password"
           name="passcode"
@@ -61,7 +61,7 @@ export function LoginForm() {
         disabled={isPending}
         className="w-full rounded-lg bg-blood py-2.5 font-medium transition hover:bg-blood-soft disabled:opacity-60"
       >
-        {isPending ? "On ouvre la porte…" : "Entrer"}
+        {isPending ? "Opening the gate…" : "Enter"}
       </button>
     </form>
   );

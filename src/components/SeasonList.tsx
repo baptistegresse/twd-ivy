@@ -10,7 +10,7 @@ interface SeasonListProps {
 export function SeasonList({ seasons, openSeason, names }: SeasonListProps) {
   return (
     <section className="space-y-3">
-      <h2 className="font-display text-xl">Les saisons</h2>
+      <h2 className="font-display text-xl">Seasons</h2>
       <div className="space-y-2">
         {seasons.map((season) => (
           <details
@@ -19,7 +19,7 @@ export function SeasonList({ seasons, openSeason, names }: SeasonListProps) {
             className="group overflow-hidden rounded-xl border border-border bg-surface"
           >
             <summary className="flex cursor-pointer items-center justify-between gap-3 px-4 py-3 hover:bg-surface-2">
-              <span className="font-display text-lg">Saison {season.season}</span>
+              <span className="font-display text-lg">Season {season.season}</span>
               <span className="flex items-center gap-3 text-xs text-muted">
                 <span className="text-blood-soft">
                   {names.me} {season.myCount}/{season.total}

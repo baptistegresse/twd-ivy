@@ -8,7 +8,7 @@ export const SESSION_MAX_AGE_SECONDS = 60 * 60 * 24 * 365;
 
 export function getSessionSecret(): string {
   const secret = process.env.SESSION_SECRET;
-  if (!secret) throw new Error("SESSION_SECRET n'est pas configurée.");
+  if (!secret) throw new Error("SESSION_SECRET is not configured.");
   return secret;
 }
 
@@ -19,6 +19,6 @@ export async function getCurrentUser(): Promise<UserId | null> {
 
 export async function requireUser(): Promise<UserId> {
   const user = await getCurrentUser();
-  if (!user) throw new Error("Non connecté.");
+  if (!user) throw new Error("Not signed in.");
   return user;
 }
