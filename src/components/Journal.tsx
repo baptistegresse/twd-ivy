@@ -54,13 +54,12 @@ export async function Journal() {
           theme={theme}
         />
         <ProgressDuo view={view} names={names} />
-        <ActivityRow items={view.activity} me={view.me.user} theme={theme} />
+        <ActivityRow items={view.activity} me={view.me.user} />
         <SeasonBrowser
           seasons={view.seasons}
           openSeason={view.openSeason}
           upNext={view.upNext}
           names={names}
-          theme={theme}
         />
         <Footer theme={theme} />
       </main>

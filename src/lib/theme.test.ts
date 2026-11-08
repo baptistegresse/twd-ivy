@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { stillSizing, themeFor, themeCopy } from "./theme";
+import { imageSizes, themeFor, themeCopy } from "./theme";
 
 describe("theme", () => {
   test("Ivy gets her pixel garden, Baptiste gets the classic look", () => {
@@ -7,11 +7,9 @@ describe("theme", () => {
     expect(themeFor("baptiste")).toBe("classic");
   });
 
-  test("pixel theme requests tiny images so they upscale into pixel art", () => {
-    expect(stillSizing("classic", "hero")).toMatchObject({ pixelWidth: null });
-    expect(stillSizing("classic", "hero").sizes).toContain("100vw");
-    expect(stillSizing("ivy", "hero").pixelWidth).toBe(128);
-    expect(stillSizing("ivy", "thumb").pixelWidth).toBe(64);
+  test("gives responsive sizes for each image slot", () => {
+    expect(imageSizes("hero")).toContain("100vw");
+    expect(imageSizes("card")).toBe("256px");
   });
 
   test("each theme has its own copy", () => {

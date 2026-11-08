@@ -16,7 +16,7 @@ export function Header({ name, theme }: HeaderProps) {
         {isIvy && <PixelSprite sprite={ROSE} scale={4} className="sway" />}
         <div>
           <h1
-            className={`font-title font-black uppercase tracking-tight text-blood ${isIvy ? "" : "text-3xl sm:text-4xl"}`}
+            className="font-title text-3xl font-black uppercase tracking-tight text-blood sm:text-4xl"
           >
             {themeCopy(theme).title}
           </h1>

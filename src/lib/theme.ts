@@ -15,33 +15,14 @@ export function themeFor(user: UserId): Theme {
   return user === "ivy" ? "ivy" : "classic";
 }
 
-const CLASSIC_SIZES: Readonly<Record<ImageSlot, string>> = {
+const IMAGE_SIZES: Readonly<Record<ImageSlot, string>> = {
   hero: "(min-width: 1024px) 1024px, 100vw",
   card: "256px",
   thumb: "(min-width: 640px) 192px, 144px",
 };
 
-/**
- * Width (px) of the tiny rendition the pixel theme loads on purpose: upscaled
- * with `image-rendering: pixelated`, it turns into chunky pixel art.
- * Must be one of next/image's allowed widths (imageSizes / deviceSizes).
- */
-const PIXEL_WIDTHS: Readonly<Record<ImageSlot, number>> = {
-  hero: 128,
-  card: 64,
-  thumb: 64,
-};
-
-export interface StillSizing {
-  sizes: string;
-  pixelWidth: number | null;
-}
-
-export function stillSizing(theme: Theme, slot: ImageSlot): StillSizing {
-  return {
-    sizes: CLASSIC_SIZES[slot],
-    pixelWidth: theme === "ivy" ? PIXEL_WIDTHS[slot] : null,
-  };
+export function imageSizes(slot: ImageSlot): string {
+  return IMAGE_SIZES[slot];
 }
 
 const COPY: Readonly<Record<Theme, ThemeCopy>> = {

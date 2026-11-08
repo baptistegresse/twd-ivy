@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { stillSizing, themeCopy, type Theme } from "@/lib/theme";
+import { imageSizes, themeCopy, type Theme } from "@/lib/theme";
 import type { EpisodeView } from "@/lib/view";
 import { EntryForm } from "./EntryForm";
 import { EpisodeStill } from "./EpisodeStill";
@@ -42,7 +42,7 @@ export function Hero({ upNext, headline, otherName, theme }: HeroProps) {
           <EpisodeStill
             src={meta.still ?? meta.thumb}
             alt={`${upNext.label} · ${meta.title}`}
-            {...stillSizing(theme, "hero")}
+            sizes={imageSizes("hero")}
             isPriority
             isBlurred={upNext.isStillBlurred}
           />

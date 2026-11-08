@@ -69,9 +69,6 @@ details > summary::-webkit-details-marker {
   --moss: #3f9a5c;
   --gold: #ff3d7f;
   --shadow: #f39cc3;
-  --body-font: var(--font-pixelify);
-  --title-font: var(--font-press-start);
-
   --radius-xs: 0;
   --radius-sm: 0;
   --radius-md: 0;
@@ -83,7 +80,6 @@ details > summary::-webkit-details-marker {
   background-color: var(--background);
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' shape-rendering='crispEdges'%3E%3Cg fill='%23ffc2da'%3E%3Crect x='10' y='8' width='3' height='3'/%3E%3Crect x='7' y='11' width='3' height='3'/%3E%3Crect x='13' y='11' width='3' height='3'/%3E%3Crect x='10' y='14' width='3' height='3'/%3E%3C/g%3E%3Crect x='10' y='11' width='3' height='3' fill='%23ffe08a'/%3E%3Cg fill='%23ffd0e2'%3E%3Crect x='34' y='32' width='2' height='2'/%3E%3Crect x='32' y='34' width='2' height='2'/%3E%3Crect x='36' y='34' width='2' height='2'/%3E%3Crect x='34' y='36' width='2' height='2'/%3E%3C/g%3E%3C/svg%3E");
   background-size: 48px 48px;
-  image-rendering: pixelated;
 }
 
 [data-theme="ivy"] .ivy-only {
@@ -104,23 +100,6 @@ details > summary::-webkit-details-marker {
 [data-theme="ivy"] .rounded-full {
   border-radius: 0;
   border-width: 2px;
-}
-
-/* Press Start 2P is wide: tame the big titles. */
-[data-theme="ivy"] .font-title {
-  line-height: 1.5;
-  letter-spacing: 0;
-}
-[data-theme="ivy"] h1.font-title {
-  font-size: clamp(1rem, 4vw, 1.6rem);
-}
-[data-theme="ivy"] h2.font-title {
-  font-size: clamp(1rem, 3.2vw, 1.9rem);
-}
-
-/* Episode stills are loaded tiny on purpose and upscaled into pixel art. */
-[data-theme="ivy"] img {
-  image-rendering: pixelated;
 }
 
 @keyframes sway {

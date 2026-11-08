@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { stillSizing, type Theme } from "@/lib/theme";
+import { imageSizes } from "@/lib/theme";
 import type { EpisodeView } from "@/lib/view";
 import { EntryForm } from "./EntryForm";
 import { EpisodeStill } from "./EpisodeStill";
@@ -11,10 +11,9 @@ interface EpisodeCardProps {
   episode: EpisodeView;
   names: { me: string; other: string };
   isUpNext: boolean;
-  theme: Theme;
 }
 
-export function EpisodeCard({ episode, names, isUpNext, theme }: EpisodeCardProps) {
+export function EpisodeCard({ episode, names, isUpNext }: EpisodeCardProps) {
   const [isEditing, setIsEditing] = useState(false);
   const { meta } = episode;
   const isWatched = episode.mine !== null;
@@ -35,7 +34,7 @@ export function EpisodeCard({ episode, names, isUpNext, theme }: EpisodeCardProp
             src={meta.still ?? meta.thumb}
             alt={meta.title}
             isBlurred={episode.isStillBlurred}
-            {...stillSizing(theme, "thumb")}
+            sizes={imageSizes("thumb")}
           />
           {isUpNext && (
             <span className="absolute left-1.5 top-1.5 rounded bg-blood px-1.5 py-0.5 text-[10px] font-semibold uppercase">
