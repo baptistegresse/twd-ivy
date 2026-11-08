@@ -18,13 +18,16 @@ export function computeProgress(entries: readonly Entry[]): Progress {
     return best && best.index >= index ? best : { season, episode, index };
   }, null);
 
-  const totalRating = entries.reduce((sum, { rating }) => sum + rating, 0);
+  const ratings = entries.flatMap(({ rating }) => (rating === null ? [] : [rating]));
+  const averageRating = ratings.length
+    ? ratings.reduce((sum, rating) => sum + rating, 0) / ratings.length
+    : null;
 
   return {
     watchedCount: entries.length,
     percent: (entries.length / TOTAL_EPISODES) * 100,
     furthest,
-    averageRating: totalRating / entries.length,
+    averageRating,
   };
 }
 

@@ -4,7 +4,7 @@ import { Journal } from "@/components/Journal";
 function JournalFallback() {
   return (
     <main className="flex flex-1 items-center justify-center px-4 py-16">
-      <p className="animate-pulse font-display text-xl text-muted">Searching the log…</p>
+      <p className="animate-pulse font-title text-xl font-bold text-muted">Searching the log…</p>
     </main>
   );
 }

@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Special_Elite } from "next/font/google";
+import { Geist, Pixelify_Sans, Press_Start_2P } from "next/font/google";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -7,10 +7,18 @@ const geistSans = Geist({
   subsets: ["latin"],
 });
 
-const specialElite = Special_Elite({
-  variable: "--font-special-elite",
+/* Only used by Ivy's theme, so they are not preloaded for everyone. */
+const pixelify = Pixelify_Sans({
+  variable: "--font-pixelify",
+  subsets: ["latin"],
+  preload: false,
+});
+
+const pressStart = Press_Start_2P({
+  variable: "--font-press-start",
   weight: "400",
   subsets: ["latin"],
+  preload: false,
 });
 
 export const metadata: Metadata = {
@@ -20,14 +28,14 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0d0f0c",
+  themeColor: "#141414",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${specialElite.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${pixelify.variable} ${pressStart.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans">{children}</body>
     </html>

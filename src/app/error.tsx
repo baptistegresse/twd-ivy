@@ -8,7 +8,7 @@ interface ErrorPageProps {
 export default function ErrorPage({ reset }: ErrorPageProps) {
   return (
     <main className="flex flex-1 flex-col items-center justify-center gap-4 px-4 text-center">
-      <p className="font-display text-2xl">The radio&apos;s crackling…</p>
+      <p className="font-title text-2xl font-bold">The radio&apos;s crackling…</p>
       <p className="text-muted">Couldn&apos;t load the log right now.</p>
       <button
         onClick={reset}

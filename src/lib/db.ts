@@ -13,7 +13,7 @@ interface EntryRow {
   user_id: string;
   season: number;
   episode: number;
-  rating: number;
+  rating: number | null;
   note: string;
   watched_at: string | Date;
 }

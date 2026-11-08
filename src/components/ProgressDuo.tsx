@@ -32,7 +32,7 @@ function ProgressCard({ name, progress, isMe }: ProgressCardProps) {
     <div className="flex-1 rounded-xl border border-border bg-surface p-4">
       <div className="flex items-baseline justify-between">
         <p className="font-medium">{isMe ? `${name} (you)` : name}</p>
-        <p className="font-display text-2xl">
+        <p className="font-title text-2xl font-bold">
           {furthest ? episodeLabel(furthest.season, furthest.episode) : "—"}
         </p>
       </div>

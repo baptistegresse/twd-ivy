@@ -15,7 +15,7 @@ export function LoginForm() {
       className="w-full max-w-sm space-y-6 rounded-xl border border-border bg-surface p-6 shadow-2xl"
     >
       <div className="space-y-1 text-center">
-        <h1 className="font-display text-3xl">Survival Log</h1>
+        <h1 className="font-title text-3xl font-black uppercase tracking-tight text-blood">Survival Log</h1>
         <p className="text-sm text-muted">The Walking Dead · Baptiste & Ivy</p>
       </div>
 

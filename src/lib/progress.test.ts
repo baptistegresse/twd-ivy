@@ -40,6 +40,14 @@ describe("computeProgress", () => {
   });
 });
 
+test("counts unrated episodes as watched but leaves them out of the average", () => {
+  const progress = computeProgress([entry(1, 1, { rating: 4 }), entry(1, 2, { rating: null })]);
+  expect(progress.watchedCount).toBe(2);
+  expect(progress.furthest?.index).toBe(2);
+  expect(progress.averageRating).toBe(4);
+  expect(computeProgress([entry(1, 1, { rating: null })]).averageRating).toBeNull();
+});
+
 describe("compareProgress", () => {
   test("says who is ahead and by how many episodes", () => {
     const me = computeProgress([entry(1, 5)]);

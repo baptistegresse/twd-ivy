@@ -6,7 +6,7 @@ import { otherUser, type Entry, type EpisodePosition, type Progress, type UserId
 export const ACTIVITY_LIMIT = 8;
 
 export interface EntrySummary {
-  rating: number;
+  rating: number | null;
   note: string;
 }
 
@@ -32,7 +32,7 @@ export interface ActivityItem {
   label: string;
   title: string;
   image: string | null;
-  rating: number;
+  rating: number | null;
   note: string;
   hidden: boolean;
   watchedAt: string;
@@ -114,7 +114,7 @@ function buildActivity(entries: readonly Entry[], me: UserId, myProgress: Progre
         label: episodeLabel(entry.season, entry.episode),
         title: meta.title,
         image: meta.still ?? meta.thumb,
-        rating: hidden ? 0 : entry.rating,
+        rating: hidden ? null : entry.rating,
         note: hidden ? "" : entry.note,
         hidden,
         watchedAt: entry.watchedAt.toISOString(),

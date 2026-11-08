@@ -20,4 +20,7 @@ await sql`
   )
 `;
 
+// Episodes can be logged as watched before they get a rating.
+await sql`ALTER TABLE entries ALTER COLUMN rating DROP NOT NULL`;
+
 console.info("✓ Table `entries` ready.");

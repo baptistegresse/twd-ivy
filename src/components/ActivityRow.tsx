@@ -1,3 +1,4 @@
+import { stillSizing, type Theme } from "@/lib/theme";
 import { USER_NAMES, type UserId } from "@/lib/types";
 import type { ActivityItem } from "@/lib/view";
 import { EpisodeStill } from "./EpisodeStill";
@@ -6,6 +7,7 @@ import { Stars } from "./Stars";
 interface ActivityRowProps {
   items: ActivityItem[];
   me: UserId;
+  theme: Theme;
 }
 
 const dateFormatter = new Intl.DateTimeFormat("en-GB", {
@@ -14,7 +16,7 @@ const dateFormatter = new Intl.DateTimeFormat("en-GB", {
   timeZone: "Europe/Paris",
 });
 
-function ActivityCard({ item, me }: { item: ActivityItem; me: UserId }) {
+function ActivityCard({ item, me, theme }: { item: ActivityItem; me: UserId; theme: Theme }) {
   const isMine = item.user === me;
   return (
     <li className="w-56 shrink-0 snap-start sm:w-64">
@@ -22,7 +24,7 @@ function ActivityCard({ item, me }: { item: ActivityItem; me: UserId }) {
         <EpisodeStill
           src={item.image}
           alt={item.hidden ? "Hidden episode" : `${item.label} · ${item.title}`}
-          sizes="256px"
+          {...stillSizing(theme, "card")}
           isBlurred={item.hidden}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-transparent to-transparent" />
@@ -31,7 +33,7 @@ function ActivityCard({ item, me }: { item: ActivityItem; me: UserId }) {
         >
           {USER_NAMES[item.user]}
         </span>
-        <span className="absolute bottom-2 left-2 font-display text-sm">
+        <span className="absolute bottom-2 left-2 font-title text-sm font-bold">
           {item.label}
           {!item.hidden && <span className="ml-1 font-sans text-xs text-foreground/70">{item.title}</span>}
         </span>
@@ -52,7 +54,7 @@ function ActivityCard({ item, me }: { item: ActivityItem; me: UserId }) {
   );
 }
 
-export function ActivityRow({ items, me }: ActivityRowProps) {
+export function ActivityRow({ items, me, theme }: ActivityRowProps) {
   return (
     <section className="space-y-3">
       <h2 className="text-lg font-semibold">Latest activity</h2>
@@ -63,7 +65,7 @@ export function ActivityRow({ items, me }: ActivityRowProps) {
       ) : (
         <ul className="-mx-4 flex snap-x gap-3 overflow-x-auto px-4 pb-2 [scrollbar-width:thin]">
           {items.map((item) => (
-            <ActivityCard key={`${item.user}-${item.label}`} item={item} me={me} />
+            <ActivityCard key={`${item.user}-${item.label}`} item={item} me={me} theme={theme} />
           ))}
         </ul>
       )}

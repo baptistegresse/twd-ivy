@@ -1,16 +1,22 @@
 @import "tailwindcss";
 
+/* ------------------------------------------------------------------ */
+/* Classic theme: plain streaming-service look (black, red, white).    */
+/* ------------------------------------------------------------------ */
 :root {
-  --background: #0d0f0c;
-  --surface: #161a14;
-  --surface-2: #1f241c;
-  --border: #2c3327;
-  --foreground: #e7e3d6;
-  --muted: #8f9384;
-  --blood: #b3261e;
-  --blood-soft: #e2554b;
-  --moss: #7d9a5a;
-  --gold: #e3b341;
+  --background: #141414;
+  --surface: #1c1c1c;
+  --surface-2: #2a2a2a;
+  --border: #333333;
+  --foreground: #ffffff;
+  --muted: #a3a3a3;
+  --blood: #e50914;
+  --blood-soft: #f6121d;
+  --moss: #46d369;
+  --gold: #f5c518;
+  --shadow: transparent;
+  --body-font: var(--font-geist-sans);
+  --title-font: var(--font-geist-sans);
 }
 
 @theme inline {
@@ -24,8 +30,8 @@
   --color-blood-soft: var(--blood-soft);
   --color-moss: var(--moss);
   --color-gold: var(--gold);
-  --font-sans: var(--font-geist-sans);
-  --font-display: var(--font-special-elite);
+  --font-sans: var(--body-font);
+  --font-title: var(--title-font);
 }
 
 html {
@@ -33,9 +39,7 @@ html {
 }
 
 body {
-  background:
-    radial-gradient(1200px 600px at 50% -200px, rgb(179 38 30 / 0.12), transparent 70%),
-    var(--background);
+  background: var(--background);
   color: var(--foreground);
 }
 
@@ -44,4 +48,96 @@ details > summary {
 }
 details > summary::-webkit-details-marker {
   display: none;
+}
+
+.ivy-only {
+  display: none;
+}
+
+/* ------------------------------------------------------------------ */
+/* Ivy theme: pink pixel-art flower garden 🌸                          */
+/* ------------------------------------------------------------------ */
+[data-theme="ivy"] {
+  --background: #ffe3ee;
+  --surface: #fff4f8;
+  --surface-2: #ffd0e2;
+  --border: #f39cc3;
+  --foreground: #5b1a3c;
+  --muted: #a65a80;
+  --blood: #ff4f9a;
+  --blood-soft: #ff3d8b;
+  --moss: #3f9a5c;
+  --gold: #ff3d7f;
+  --shadow: #f39cc3;
+  --body-font: var(--font-pixelify);
+  --title-font: var(--font-press-start);
+
+  --radius-xs: 0;
+  --radius-sm: 0;
+  --radius-md: 0;
+  --radius-lg: 0;
+  --radius-xl: 0;
+  --radius-2xl: 0;
+
+  color-scheme: light;
+  background-color: var(--background);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' shape-rendering='crispEdges'%3E%3Cg fill='%23ffc2da'%3E%3Crect x='10' y='8' width='3' height='3'/%3E%3Crect x='7' y='11' width='3' height='3'/%3E%3Crect x='13' y='11' width='3' height='3'/%3E%3Crect x='10' y='14' width='3' height='3'/%3E%3C/g%3E%3Crect x='10' y='11' width='3' height='3' fill='%23ffe08a'/%3E%3Cg fill='%23ffd0e2'%3E%3Crect x='34' y='32' width='2' height='2'/%3E%3Crect x='32' y='34' width='2' height='2'/%3E%3Crect x='36' y='34' width='2' height='2'/%3E%3Crect x='34' y='36' width='2' height='2'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 48px 48px;
+  image-rendering: pixelated;
+}
+
+[data-theme="ivy"] .ivy-only {
+  display: inline-block;
+}
+[data-theme="ivy"] .classic-only {
+  display: none;
+}
+
+/* Chunky pixel boxes: square corners, thick borders, hard drop shadow. */
+[data-theme="ivy"] :is(.rounded-lg, .rounded-xl, .rounded-2xl) {
+  border-width: 3px;
+  box-shadow: 4px 4px 0 0 var(--shadow);
+}
+[data-theme="ivy"] .rounded-md {
+  box-shadow: 3px 3px 0 0 var(--foreground);
+}
+[data-theme="ivy"] .rounded-full {
+  border-radius: 0;
+  border-width: 2px;
+}
+
+/* Press Start 2P is wide: tame the big titles. */
+[data-theme="ivy"] .font-title {
+  line-height: 1.5;
+  letter-spacing: 0;
+}
+[data-theme="ivy"] h1.font-title {
+  font-size: clamp(1rem, 4vw, 1.6rem);
+}
+[data-theme="ivy"] h2.font-title {
+  font-size: clamp(1rem, 3.2vw, 1.9rem);
+}
+
+/* Episode stills are loaded tiny on purpose and upscaled into pixel art. */
+[data-theme="ivy"] img {
+  image-rendering: pixelated;
+}
+
+@keyframes sway {
+  0%,
+  100% {
+    transform: rotate(-4deg);
+  }
+  50% {
+    transform: rotate(4deg);
+  }
+}
+[data-theme="ivy"] .sway {
+  transform-origin: bottom center;
+  animation: sway 3s steps(4) infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-theme="ivy"] .sway {
+    animation: none;
+  }
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { stillSizing, type Theme } from "@/lib/theme";
 import type { EpisodeView } from "@/lib/view";
 import { EntryForm } from "./EntryForm";
 import { EpisodeStill } from "./EpisodeStill";
@@ -10,9 +11,10 @@ interface EpisodeCardProps {
   episode: EpisodeView;
   names: { me: string; other: string };
   isUpNext: boolean;
+  theme: Theme;
 }
 
-export function EpisodeCard({ episode, names, isUpNext }: EpisodeCardProps) {
+export function EpisodeCard({ episode, names, isUpNext, theme }: EpisodeCardProps) {
   const [isEditing, setIsEditing] = useState(false);
   const { meta } = episode;
   const isWatched = episode.mine !== null;
@@ -25,11 +27,11 @@ export function EpisodeCard({ episode, names, isUpNext }: EpisodeCardProps) {
         aria-expanded={isEditing}
         className="flex w-full gap-3 p-3 text-left sm:gap-4"
       >
-        <span className="hidden w-6 shrink-0 self-center text-center font-display text-2xl text-muted sm:block">
+        <span className="hidden w-6 shrink-0 self-center text-center font-title text-2xl font-bold text-muted sm:block">
           {episode.episode}
         </span>
         <span className="relative aspect-video w-36 shrink-0 overflow-hidden rounded-md bg-surface-2 sm:w-48">
-          <EpisodeStill src={meta.still ?? meta.thumb} alt={meta.title} sizes="(min-width: 640px) 192px, 144px" />
+          <EpisodeStill src={meta.still ?? meta.thumb} alt={meta.title} {...stillSizing(theme, "thumb")} />
           {isUpNext && (
             <span className="absolute left-1.5 top-1.5 rounded bg-blood px-1.5 py-0.5 text-[10px] font-semibold uppercase">
               Up next

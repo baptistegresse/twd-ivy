@@ -4,6 +4,8 @@ import { useActionState, useState, useTransition } from "react";
 import { removeEntry, saveEntry, type ActionState } from "@/app/actions";
 import { NOTE_MAX_LENGTH, noteLength } from "@/lib/note";
 import type { EpisodeView } from "@/lib/view";
+import { PixelSprite } from "./pixel/PixelSprite";
+import { HEART } from "./pixel/sprites";
 
 const RATINGS = [1, 2, 3, 4, 5] as const;
 const INITIAL_STATE: ActionState = { error: null };
@@ -61,7 +63,8 @@ export function EntryForm({ episode, onDone }: EntryFormProps) {
               className={`rounded peer-focus-visible:ring-2 peer-focus-visible:ring-gold ${value <= rating ? "text-gold" : "text-border hover:text-gold/60"}`}
               aria-hidden
             >
-              ★
+              <span className="classic-only">★</span>
+              <PixelSprite sprite={HEART} scale={4} className="ivy-only" />
             </span>
             <span className="sr-only">{value} out of 5</span>
           </label>

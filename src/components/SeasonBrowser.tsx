@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import type { Theme } from "@/lib/theme";
 import type { EpisodeView, SeasonView } from "@/lib/view";
 import { EpisodeCard } from "./EpisodeCard";
 
@@ -9,9 +10,10 @@ interface SeasonBrowserProps {
   openSeason: number;
   upNext: EpisodeView | null;
   names: { me: string; other: string };
+  theme: Theme;
 }
 
-export function SeasonBrowser({ seasons, openSeason, upNext, names }: SeasonBrowserProps) {
+export function SeasonBrowser({ seasons, openSeason, upNext, names, theme }: SeasonBrowserProps) {
   const [selected, setSelected] = useState(openSeason);
   const season = seasons[selected - 1];
 
@@ -61,6 +63,7 @@ export function SeasonBrowser({ seasons, openSeason, upNext, names }: SeasonBrow
             episode={episode}
             names={names}
             isUpNext={upNext?.label === episode.label}
+            theme={theme}
           />
         ))}
       </ul>

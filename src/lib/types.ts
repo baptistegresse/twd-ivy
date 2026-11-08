@@ -11,7 +11,8 @@ export interface Entry {
   user: UserId;
   season: number;
   episode: number;
-  rating: number;
+  /** null = watched, not rated yet. */
+  rating: number | null;
   note: string;
   watchedAt: Date;
 }
