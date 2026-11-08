@@ -2,7 +2,7 @@ import { TOTAL_EPISODES, episodeLabel } from "@/lib/episodes";
 import type { Progress } from "@/lib/types";
 import type { DashboardView } from "@/lib/view";
 
-interface Names {
+export interface Names {
   me: string;
   other: string;
 }
@@ -14,7 +14,7 @@ interface ProgressDuoProps {
 
 const plural = (count: number, word: string) => `${count} ${word}${count > 1 ? "s" : ""}`;
 
-function headline({ comparison }: DashboardView, names: Names): string {
+export function progressHeadline({ comparison }: DashboardView, names: Names): string {
   if (comparison.leader === "tie") return "You're at the exact same spot 🤝";
   const ahead = comparison.leader === "me" ? "You are" : `${names.other} is`;
   return `${ahead} ${plural(comparison.gap, "episode")} ahead`;
@@ -54,8 +54,7 @@ function ProgressCard({ name, progress, isMe }: ProgressCardProps) {
 
 export function ProgressDuo({ view, names }: ProgressDuoProps) {
   return (
-    <section className="space-y-3">
-      <p className="text-center font-display text-xl text-blood-soft">{headline(view, names)}</p>
+    <section>
       <div className="flex flex-col gap-3 sm:flex-row">
         <ProgressCard name={names.me} progress={view.me.progress} isMe />
         <ProgressCard name={names.other} progress={view.other.progress} isMe={false} />

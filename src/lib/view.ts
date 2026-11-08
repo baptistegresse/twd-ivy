@@ -1,3 +1,4 @@
+import { getEpisodeMeta, type EpisodeMeta } from "./catalog";
 import { SEASONS, episodeLabel } from "./episodes";
 import { canSeeEntry, compareProgress, computeProgress, type Comparison } from "./progress";
 import { otherUser, type Entry, type EpisodePosition, type Progress, type UserId } from "./types";
@@ -13,6 +14,7 @@ export interface EpisodeView {
   season: number;
   episode: number;
   label: string;
+  meta: EpisodeMeta;
   mine: EntrySummary | null;
   theirs: EntrySummary | "hidden" | null;
 }
@@ -28,6 +30,8 @@ export interface SeasonView {
 export interface ActivityItem {
   user: UserId;
   label: string;
+  title: string;
+  image: string | null;
   rating: number;
   note: string;
   hidden: boolean;
@@ -44,6 +48,7 @@ export interface DashboardView {
   other: PersonView;
   comparison: Comparison;
   openSeason: number;
+  upNext: EpisodeView | null;
   seasons: SeasonView[];
   activity: ActivityItem[];
 }
@@ -82,6 +87,7 @@ function buildSeasons(
         season,
         episode,
         label: episodeLabel(season, episode),
+        meta: getEpisodeMeta(season, episode),
         mine: summarize(mine.get(key)),
         theirs: their && !isVisible ? "hidden" : summarize(their),
       };
@@ -102,9 +108,12 @@ function buildActivity(entries: readonly Entry[], me: UserId, myProgress: Progre
     .slice(0, ACTIVITY_LIMIT)
     .map((entry) => {
       const hidden = entry.user !== me && !canSeeEntry(myProgress, entry.season, entry.episode);
+      const meta = getEpisodeMeta(entry.season, entry.episode);
       return {
         user: entry.user,
         label: episodeLabel(entry.season, entry.episode),
+        title: meta.title,
+        image: meta.still ?? meta.thumb,
         rating: hidden ? 0 : entry.rating,
         note: hidden ? "" : entry.note,
         hidden,
@@ -120,12 +129,16 @@ export function buildDashboard(entries: readonly Entry[], me: UserId): Dashboard
   const myProgress = computeProgress(myEntries);
   const theirProgress = computeProgress(theirEntries);
 
+  const seasons = buildSeasons(indexEntries(myEntries), indexEntries(theirEntries), myProgress);
+  const next = nextEpisode(myProgress.furthest);
+
   return {
     me: { user: me, progress: myProgress },
     other: { user: other, progress: theirProgress },
     comparison: compareProgress(myProgress, theirProgress),
-    openSeason: nextEpisode(myProgress.furthest)?.season ?? SEASONS.length,
-    seasons: buildSeasons(indexEntries(myEntries), indexEntries(theirEntries), myProgress),
+    openSeason: next?.season ?? SEASONS.length,
+    upNext: next ? seasons[next.season - 1].episodes[next.episode - 1] : null,
+    seasons,
     activity: buildActivity(entries, me, myProgress),
   };
 }

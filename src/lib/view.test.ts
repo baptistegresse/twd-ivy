@@ -59,10 +59,24 @@ describe("buildDashboard", () => {
     expect(ep3.theirs).toBeNull();
   });
 
+  test("points to my next episode, with its TVmaze metadata", () => {
+    const view = buildDashboard(entries, "baptiste");
+    expect(view.upNext).toMatchObject({ label: "S01E03", mine: null, theirs: "hidden" });
+    expect(view.upNext?.meta.title).toBeTruthy();
+    expect(buildDashboard([], "ivy").upNext?.meta.title).toBe("Days Gone Bye");
+  });
+
+  test("has nothing up next once the series is finished", () => {
+    const finale = entry("baptiste", 11, 24, { watchedAt: new Date("2026-11-08T20:00:00Z") });
+    expect(buildDashboard([finale], "baptiste").upNext).toBeNull();
+  });
+
   test("builds a recent activity feed, newest first, with spoilers hidden", () => {
     const view = buildDashboard(entries, "baptiste");
     expect(view.activity[0]).toMatchObject({ user: "ivy", label: "S01E03", hidden: true });
     expect(view.activity[0].note).toBe("");
+    expect(view.activity[0].title).toBeTruthy();
+    expect(view.activity[0].image).toMatch(/^https:/);
     expect(view.activity).toHaveLength(5);
   });
 
